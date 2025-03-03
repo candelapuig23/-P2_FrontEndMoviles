@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ListComponent } from './components/players/list/list.component'; // 👈 Importar el componente
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true, // 👈 Asegurar que AppComponent también sea standalone
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [ListComponent] // 👈 Importar el ListComponent
 })
 export class AppComponent {
   title = 'equipo-basket';
