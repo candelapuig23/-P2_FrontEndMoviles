@@ -1,33 +1,38 @@
 /* Estilos generales */
 .container {
-  max-width: 900px;
-  margin: auto;
   text-align: center;
-  font-family: Arial, sans-serif;
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .title {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #4A148C;
 }
 
-/* Estilos de la cuadrícula de jugadores */
+/* Grid de jugadores */
 .players-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 80px;
+  padding: 80px;
+  justify-content: center;
 }
 
-/* Estilos de cada tarjeta de jugador */
+/* Tarjetas de jugadores */
 .player-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  cursor: pointer;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  text-align: center;
   transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .player-card:hover {
@@ -35,22 +40,86 @@
 }
 
 .player-image {
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
+  margin-bottom: 15px;
   object-fit: cover;
-  margin-bottom: 10px;
 }
 
-/* Estilos de los detalles del jugador */
-.player-details {
-  background: #f4f4f4;
-  padding: 10px;
-  border-radius: 8px;
-  margin-top: 10px;
-}
 
-.player-details p {
+.player-card h3 {
+  font-size: 22px;
   margin: 5px 0;
-  font-size: 14px;
+  color: #3b3b3b;
+  font-weight: bold;
 }
+
+.player-card p {
+  font-size: 16px;
+  color: #666;
+  margin: 3px 0;
+}
+
+/* Estilos para el modal */
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.modal-content {
+  border-radius: 16px;
+  padding: 25px;
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  color: white;
+}
+
+.modal-header {
+  background: white;
+  color: #4A148C;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.modal-body {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.modal-body img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 0;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  object-fit: contain;
+}
+
+.modal-body .separator {
+  width: 80%;
+  height: 4px;
+  background: #4A148C; /* Color lila oscuro */
+  margin-top: -10px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.modal-body p {
+  font-size: 18px;
+  color: #4A148C;
+  margin: 12px 0;
+}
+
+.modal-footer {
+  border-top: none;
+  background: white;
+}
+
