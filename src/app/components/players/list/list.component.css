@@ -85,6 +85,11 @@
   border-top-right-radius: 16px;
 }
 
+
+.modal-title {
+  font-weight: bold;
+}
+
 .modal-body {
   text-align: center;
   display: flex;
@@ -106,7 +111,7 @@
 .modal-body .separator {
   width: 80%;
   height: 4px;
-  background: #4A148C; /* Color lila oscuro */
+  background: #4A148C;
   margin-top: -10px;
   margin-bottom: 20px;
   border-radius: 2px;
@@ -123,3 +128,16 @@
   background: white;
 }
 
+.btn {
+  background-color: #4A148C;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #E68900;
+}

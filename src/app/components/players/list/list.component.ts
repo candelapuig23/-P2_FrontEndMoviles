@@ -8,7 +8,7 @@ import * as bootstrap from 'bootstrap';
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
-  imports: [NgIf, NgFor]
+  imports: [NgFor]
 })
 export class ListComponent {
 
@@ -31,7 +31,7 @@ export class ListComponent {
 
     openModal(player: any) {
       this.selectedPlayer = player;
-      setTimeout(() => { // Asegurar que el DOM se actualiza antes de abrir el modal
+      setTimeout(() => {
         const modalElement = document.getElementById('playerModal');
         if (modalElement) {
           new bootstrap.Modal(modalElement).show();
