@@ -8,7 +8,9 @@ import * as bootstrap from 'bootstrap';
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
+
   imports: [NgIf, NgFor, FormsModule] // 🔹 Asegurar que FormsModule está en imports
+
 })
 export class ListComponent {
     searchTerm: string = ''; // Campo para la búsqueda
