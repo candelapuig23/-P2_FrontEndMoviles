@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import * as bootstrap from 'bootstrap';
-
 
 @Component({
   selector: 'app-list',
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
-  imports: [NgIf, NgFor]
+  imports: [NgIf, NgFor, FormsModule] // 🔹 Asegurar que FormsModule está en imports
 })
 export class ListComponent {
+    searchTerm: string = ''; // Campo para la búsqueda
 
     players = [
       { number: 10, name: 'Moses Moody', position: 'Guard', image: 'assets/img/moody.png', height: "6'4\"", weight: '205 lbs', age: 22, ppg: 10.1, rpg: 4.8, apg: 3.5 },
@@ -26,16 +27,22 @@ export class ListComponent {
       { number: 1, name: 'Victor Wembanyama', position: 'Center', image: 'assets/img/wemby.png', height: "7'4\"", weight: '220 lbs', age: 20, ppg: 20.1, rpg: 10.3, apg: 3.1},
       { number: 25, name: 'Ben Simmons', position: 'Point Guard', image: 'assets/img/simmons.png', height: "6'10\"", weight: '230 lbs', age: 27, ppg: 14.5, rpg: 7.5, apg: 6.3}
     ];
-
     selectedPlayer: any = null;
 
     openModal(player: any) {
       this.selectedPlayer = player;
-      setTimeout(() => { // Asegurar que el DOM se actualiza antes de abrir el modal
+      setTimeout(() => {
         const modalElement = document.getElementById('playerModal');
         if (modalElement) {
           new bootstrap.Modal(modalElement).show();
         }
       }, 100);
     }
-  }
+
+    filteredPlayers() {
+      return this.players.filter(player => 
+        player.name.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
+        player.position.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+}

@@ -1,36 +1,17 @@
 <div class="container">
   <h2 class="title">Lista de Jugadores</h2>
 
+  <!-- Campo de búsqueda -->
+  <input type="text" class="form-control search-box" placeholder="Buscar jugadores por nombre o posición..."
+    [(ngModel)]="searchTerm">
+
+  <!-- Grid de jugadores con el filtro aplicado -->
   <div class="players-grid">
-    <div *ngFor="let player of players" class="player-card" (click)="openModal(player)">
+    <div *ngFor="let player of filteredPlayers()" class="player-card" (click)="openModal(player)">
       <img [src]="player.image" alt="{{ player.name }}" class="player-image">
       <h3>{{ player.name }}</h3>
       <p><strong>Posición:</strong> {{ player.position }}</p>
       <p><strong>Número:</strong> #{{ player.number }}</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Bootstrap -->
-<div class="modal fade" id="playerModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">{{ selectedPlayer?.name }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img [src]="selectedPlayer?.image" class="img-fluid mb-2" alt="{{ selectedPlayer?.name }}">
-        <p><strong>Altura:</strong> {{ selectedPlayer?.height }}</p>
-        <p><strong>Peso:</strong> {{ selectedPlayer?.weight }}</p>
-        <p><strong>Edad:</strong> {{ selectedPlayer?.age }} años</p>
-        <p><strong>PPG:</strong> {{ selectedPlayer?.ppg }}</p>
-        <p><strong>RPG:</strong> {{ selectedPlayer?.rpg }}</p>
-        <p><strong>APG:</strong> {{ selectedPlayer?.apg }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
     </div>
   </div>
 </div>
