@@ -1,0 +1,50 @@
+<div class="flip-container" [class.flipped]="isFlipped" (click)="toggleFlip()">
+  <div class="flipper">
+    <!-- Cara Frontal -->
+    <div class="front">
+      <img [src]="player.image" alt="{{ player.name }}" class="player-image">
+      <h3>{{ player.name }}</h3>
+      <p><strong>Posición:</strong> {{ player.position }}</p>
+      <p><strong>Número:</strong> #{{ player.number }}</p>
+    </div>
+
+    <!-- Cara Trasera -->
+    <div class="back">
+      <img [src]="player.image" alt="{{ player.name }}" class="player-image">
+      <table class="details-table">
+        <tr>
+          <td><strong>Altura:</strong></td>
+          <td>{{ player.height }}</td>
+        </tr>
+        <tr>
+          <td><strong>Peso:</strong></td>
+          <td>{{ player.weight }}</td>
+        </tr>
+        <tr>
+          <td><strong>Edad:</strong></td>
+          <td>{{ player.age }} años</td>
+        </tr>
+        <tr>
+          <td><strong>PPG:</strong></td>
+          <td>{{ player.ppg }}</td>
+        </tr>
+        <tr>
+          <td><strong>RPG:</strong></td>
+          <td>{{ player.rpg }}</td>
+        </tr>
+        <tr>
+          <td><strong>APG:</strong></td>
+          <td>{{ player.apg }}</td>
+        </tr>
+      </table>
+
+      <!-- Botón "Ver mejores momentos" -->
+      <button class="btn-highlight" (click)="openVideo($event)">Ver mejores momentos</button>
+    </div>
+  </div>
+</div>
+
+<!-- Agregar `app-media` para que `ViewChild` lo encuentre -->
+<app-media [videoSrc]="'assets/media/' + player.videoFile"></app-media>
+
+

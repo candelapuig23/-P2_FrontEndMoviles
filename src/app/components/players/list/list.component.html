@@ -1,17 +1,11 @@
 <div class="container">
   <div id="jugadores" class="container">
 
-  <!-- Campo de búsqueda -->
-  <input type="text" class="form-control search-box" placeholder="Buscar jugadores por nombre o posición..."
-    [(ngModel)]="searchTerm">
-
-  <!-- Grid de jugadores con el filtro aplicado -->
-  <div class="players-grid">
-    <div *ngFor="let player of filteredPlayers()" class="player-card" (click)="openModal(player)">
-      <img [src]="player.image" alt="{{ player.name }}" class="player-image">
-      <h3>{{ player.name }}</h3>
-      <p><strong>Posición:</strong> {{ player.position }}</p>
-      <p><strong>Número:</strong> #{{ player.number }}</p>
+  <!-- Campo de búsqueda. Aquí conectamos SearchComponent con ListComponent-->
+  <div class="container">
+    <app-search (searchEvent)="filterPlayers($event)"></app-search>
+  <!-- Tarjetas de jugadores con FlipCardComponent -->
+    <div class="players-grid">
+      <app-flip-card *ngFor="let player of filteredPlayers" [player]="player"></app-flip-card>
     </div>
   </div>
-</div>

@@ -1,156 +1,31 @@
-/* Estilos generales */
+
 .container {
   text-align: center;
   margin-top: 20px;
   font-family: 'Poppins', sans-serif;
 }
 
-.title {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #4A148C;
-}
-
 /* Grid de jugadores */
 .players-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 80px;
-  padding: 80px;
-  justify-content: center;
-}
-
-/* Tarjetas de jugadores */
-.player-card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
   padding: 20px;
-  text-align: center;
-  transition: transform 0.2s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.player-card:hover {
-  transform: scale(1.05);
-}
-
-.player-image {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  object-fit: cover;
-}
-
-
-.player-card h3 {
-  font-size: 22px;
-  margin: 5px 0;
-  color: #3b3b3b;
-  font-weight: bold;
-}
-
-.player-card p {
-  font-size: 16px;
-  color: #666;
-  margin: 3px 0;
-}
-
-/* Estilos para el modal */
-.modal-dialog {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-}
-
-.modal-content {
-  border-radius: 16px;
-  padding: 25px;
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  color: white;
-}
-
-.modal-header {
-  background: white;
-  color: #4A148C;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
 }
 
 
-.modal-title {
-  font-weight: bold;
-}
-
-.modal-body {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.modal-body img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 0;
-  margin-bottom: 30px;
-  padding-bottom: 30px;
-  object-fit: contain;
-}
-
-.modal-body .separator {
-  width: 80%;
-  height: 4px;
-  background: #4A148C;
-  margin-top: -10px;
-  margin-bottom: 20px;
-  border-radius: 2px;
-}
-
-.modal-body p {
-  font-size: 18px;
-  color: #4A148C;
-  margin: 12px 0;
-}
-
-.modal-footer {
-  border-top: none;
-  background: white;
-}
-
-
-.search-box {
-  width: 50%;
-  margin: 20px auto;
-  padding: 10px;
-  font-size: 18px;
-  border: 2px solid #4A148C;
-  border-radius: 8px;
-  text-align: center;
-}
-
-
-.btn {
-  background-color: #4A148C;
+.btn-primary {
+  background-color: #FF9800;
   color: white;
   border: none;
+  padding: 12px 24px;
   font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+  border-radius: 10px;
+  transition: background 0.3s;
 }
 
-.btn:hover {
+.btn-primary:hover {
   background-color: #E68900;
 }
 
