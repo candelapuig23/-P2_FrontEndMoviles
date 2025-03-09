@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './media.component.html',
   styleUrls: ['./media.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class MediaComponent implements AfterViewInit {
   @Input() videoSrc!: string;
@@ -14,33 +14,35 @@ export class MediaComponent implements AfterViewInit {
 
   constructor(private el: ElementRef) {}
 
-
   ngAfterViewInit() {
     import('bootstrap').then((bootstrap) => {
-      console.log('🟢 Bootstrap cargado en MediaComponent');
       const modalElement = this.el.nativeElement.querySelector('#videoModal');
       if (modalElement) {
         this.modalInstance = new bootstrap.Modal(modalElement);
-        console.log('✅ Modal inicializado correctamente');
-      } else {
-        console.error('❌ Error: No se encontró el modal en el DOM');
+        modalElement.addEventListener('hidden.bs.modal', () =>
+          this.stopVideo()
+        );
       }
     });
   }
 
   openModal() {
     if (this.modalInstance) {
-      console.log('🟢 Abriendo modal...');
       this.modalInstance.show();
-    } else {
-      console.error('❌ Error: El modal no se inicializó correctamente.');
     }
   }
 
   closeModal() {
     if (this.modalInstance) {
-      console.log('🟢 Cerrando modal...');
       this.modalInstance.hide();
+    }
+  }
+
+  private stopVideo() {
+    const videoElement = this.el.nativeElement.querySelector('video');
+    if (videoElement) {
+      videoElement.pause();
+      videoElement.currentTime = 0;
     }
   }
 }
