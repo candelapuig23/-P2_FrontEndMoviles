@@ -41,7 +41,11 @@ export class FlipCardComponent {
   openVideo(event: Event) {
     event.stopPropagation(); // Evita que la carta gire cuando se abre el modal
     if (this.mediaComponent) {
+      console.log(`🟢 Abriendo video de ${this.player.name}...`);
+      this.mediaComponent.playerName = this.player.name; // Asigna el nombre del jugador al modal
       this.mediaComponent.openModal();
+    } else {
+      console.error('❌ No se encontró el MediaComponent');
     }
   }
 }

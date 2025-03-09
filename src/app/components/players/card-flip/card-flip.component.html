@@ -9,37 +9,19 @@
     </div>
 
     <!-- Cara Trasera -->
-    <div class="back">
-      <img [src]="player.image" alt="{{ player.name }}" class="player-image">
+        <div class="back">
+      <h2 class="player-name">{{ player.name }}</h2> <!-- Nombre del jugador en la parte trasera -->
       <table class="details-table">
-        <tr>
-          <td><strong>Altura:</strong></td>
-          <td>{{ player.height }}</td>
-        </tr>
-        <tr>
-          <td><strong>Peso:</strong></td>
-          <td>{{ player.weight }}</td>
-        </tr>
-        <tr>
-          <td><strong>Edad:</strong></td>
-          <td>{{ player.age }} años</td>
-        </tr>
-        <tr>
-          <td><strong>PPG:</strong></td>
-          <td>{{ player.ppg }}</td>
-        </tr>
-        <tr>
-          <td><strong>RPG:</strong></td>
-          <td>{{ player.rpg }}</td>
-        </tr>
-        <tr>
-          <td><strong>APG:</strong></td>
-          <td>{{ player.apg }}</td>
-        </tr>
+        <tr><td><strong>Altura:</strong></td><td>{{ player.height }}</td></tr>
+        <tr><td><strong>Peso:</strong></td><td>{{ player.weight }}</td></tr>
+        <tr><td><strong>Edad:</strong></td><td>{{ player.age }}</td></tr>
+        <tr><td><strong>PPG:</strong></td><td>{{ player.ppg }}</td></tr>
+        <tr><td><strong>RPG:</strong></td><td>{{ player.rpg }}</td></tr>
+        <tr><td><strong>APG:</strong></td><td>{{ player.apg }}</td></tr>
       </table>
 
       <!-- Botón "Ver mejores momentos" -->
-      <button class="btn-highlight" (click)="openVideo($event)">Ver mejores momentos</button>
+      <button class="btn-highlight" (click)="openVideo($event)">Ver Mejores Momentos</button>
     </div>
   </div>
 </div>
