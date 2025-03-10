@@ -1,11 +1,15 @@
 <div class="container">
   <div id="jugadores" class="container">
 
-  <!-- Campo de búsqueda. Aquí conectamos SearchComponent con ListComponent-->
-  <div class="container">
-    <app-search (searchEvent)="filterPlayers($event)"></app-search>
-  <!-- Tarjetas de jugadores con FlipCardComponent -->
-    <div class="players-grid">
-      <app-flip-card *ngFor="let player of filteredPlayers" [player]="player"></app-flip-card>
+  <!-- Campo de búsqueda: conectamos SearchComponent con ListComponent -->
+    <div class="container">
+      <app-search (searchEvent)="searchTerm = $event"></app-search>
+
+   <!-- Tarjetas de jugadores con FlipCardComponent -->
+      <div class="players-grid">
+        <app-flip-card *ngFor="let player of players | playerFilter:searchTerm" [player]="player"></app-flip-card>  <!-- Usamos el pipe en *ngFor -->
+      </div>
     </div>
+
   </div>
+</div>

@@ -1,4 +1,6 @@
-export const PLAYERS = [
+import { Player } from "../components/players/player/player.model";
+
+export const PLAYERS: Player[] = [
   {
     number: 10,
     name: 'Moses Moody',

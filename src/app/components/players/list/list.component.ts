@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { SearchComponent } from '../../shared/search/search.component';
 import { FlipCardComponent } from '../card-flip/card-flip.component';
-import { PLAYERS } from './players'; //hacemos la importación del Array de jugadores
+import { PLAYERS } from '../../../data/players'; //hacemos la importación del Array de jugadores
+import { Player } from '../player/player.model'; // importamos la interfaz
+import { PlayerFilterPipe } from '../../pipes/player-filter.pipe'; // IMPORTAMOS EL PIPE
+
 
 
 @Component({
@@ -11,36 +14,16 @@ import { PLAYERS } from './players'; //hacemos la importación del Array de juga
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 
-  imports: [NgFor, SearchComponent, FlipCardComponent]
-
+  imports: [NgFor, SearchComponent, FlipCardComponent, PlayerFilterPipe],
 })
-
 export class ListComponent {
+  players: Player[] = PLAYERS; // Definimos que `players` es un array de Player
+  searchTerm: string = ''; // Se usará en el Pipe
 
-    players = PLAYERS;
-
-    filteredPlayers = [...this.players];
-
-    ngOnInit() {
-      this.filteredPlayers = [...this.players];
-    }
-
-
-    /***
-   * Método para filtrar jugadores basado en la búsqueda del usuario.
-   */
-    filterPlayers(searchTerm: string) {
-      const term = searchTerm.toLowerCase();
-      this.filteredPlayers = this.players.filter(player =>
-        player.name.toLowerCase().includes(term) ||
-        player.position.toLowerCase().includes(term) ||
-        player.number.toString().includes(term)
-      );
-    }
   /**
-     * Método para manejar la lógica del componente FlipCard
-     */
+   * Método para manejar la lógica del componente FlipCard
+   */
   toggleFlip(player: any) {
     player.isFlipped = !player.isFlipped;
   }
-  }
+}
