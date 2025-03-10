@@ -1,31 +1,24 @@
-
 .container {
   text-align: center;
   margin-top: 20px;
   font-family: 'Poppins', sans-serif;
 }
 
-/* Grid de jugadores */
+/* Centrar los jugadores en cualquier cantidad */
 .players-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  /* Cambiamos grid por flex */
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Siempre centrado */
+  align-items: center;
   gap: 20px;
   padding: 20px;
-  justify-content: center;
+  min-height: 300px;
+  width: 100%;
 }
 
-
-.btn-primary {
-  background-color: #FF9800;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 10px;
-  transition: background 0.3s;
+/* Si hay solo un jugador, que se quede centrado */
+.players-grid>*:only-child {
+  margin: 0 auto;
 }
-
-.btn-primary:hover {
-  background-color: #E68900;
-}
-
