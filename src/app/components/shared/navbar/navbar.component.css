@@ -1,13 +1,3 @@
-/* Estilos generales */
-html {
-  scroll-behavior: smooth; /* Efecto de desplazamiento suave */
-}
-
-.container {
-  text-align: center;
-  margin-top: 20px;
-  font-family: 'Poppins', sans-serif;
-}
 
 /* Navbar fijo */
 .navbar {
@@ -16,8 +6,6 @@ html {
   left: 0;
   width: 100%;
   height: 70px;
-  background: white; /* Fondo blanco */
-  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
@@ -26,7 +14,11 @@ html {
 }
 
 .nav-logo img {
-  height: 50px; /* Tamaño del logo */
+  height: 50px;
+}
+
+.nav-logo img:hover {
+  transform: scale(1.1);
 }
 
 .nav-links {
@@ -36,71 +28,14 @@ html {
 }
 
 .nav-links li a {
-  color: #4A148C; /* Color lila oscuro */
+  color: var(--primary-color);
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-links li a:hover {
-  color: #FF9800; /* Color de pelota de básquet */
+  color: var(--secondary-color);
 }
 
-/* Header con video de fondo */
-.header {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* Ocupa toda la pantalla */
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.header-content {
-  position: relative;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.header-logo {
-  width: 400px; /* Aumentar tamaño del logo */
-  max-width: 80%;
-}
-
-/* Estilos de los botones */
-.buttons {
-  display: flex;
-  gap: 20px;
-}
-
-.btn {
-  background-color: #FF9800;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #E68900;
-}

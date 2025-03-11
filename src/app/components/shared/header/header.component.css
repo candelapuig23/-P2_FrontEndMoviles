@@ -1,9 +1,4 @@
-/* Estilos generales */
-.container {
-  text-align: center;
-  margin-top: 20px;
-  font-family: 'Poppins', sans-serif;
-}
+
 
 /* Header con video de fondo */
 .header {
@@ -25,6 +20,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+  filter: brightness(0.6);
 }
 
 .header-content {
@@ -40,26 +36,10 @@
 .header-logo {
   width: 600px;
   max-width: 80%;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Estilos de los botones */
-.buttons {
-  display: flex;
-  gap: 90px;
+.header-logo:hover {
+  transform: scale(1.1);
 }
 
-.btn {
-  background-color: #FF9800;
-  color: whitesmoke;
-  border: none;
-  padding: 15px 30px;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #4A148C;
-}

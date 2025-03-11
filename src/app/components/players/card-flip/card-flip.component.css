@@ -6,6 +6,12 @@
   position: relative;
   padding: 30px;
   overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto de crecimiento en hover */
+.flip-container:hover {
+  transform: scale(1.1);
 }
 
 .flipper {
@@ -45,7 +51,7 @@
 }
 
 .back {
-  background: #4A148C;
+  background: var(--primary-color);
   color: white;
   transform: rotateY(180deg);
 }
@@ -57,6 +63,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
 
 /* Tabla de detalles */
 .details-table {
@@ -81,7 +88,7 @@
 
 /* Botón */
 .btn-highlight {
-  background-color: #FFA500;
+  background-color: var(--secondary-color);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -95,3 +102,4 @@
 .btn-highlight:hover {
   background-color: #E68900;
 }
+
