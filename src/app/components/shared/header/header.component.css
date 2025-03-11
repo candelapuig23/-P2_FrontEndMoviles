@@ -9,7 +9,8 @@
 .header {
   position: relative;
   width: 100%;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh;
+  /* Ocupa toda la pantalla */
   overflow: hidden;
   display: flex;
   align-items: center;
