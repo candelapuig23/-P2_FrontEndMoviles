@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardFlipComponent } from './card-flip.component';
+import { FlipCardComponent } from './card-flip.component';
 
 describe('CardFlipComponent', () => {
-  let component: CardFlipComponent;
-  let fixture: ComponentFixture<CardFlipComponent>;
+  let component: FlipCardComponent;
+  let fixture: ComponentFixture<FlipCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardFlipComponent]
+      imports: [FlipCardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CardFlipComponent);
+    fixture = TestBed.createComponent(FlipCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

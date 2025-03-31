@@ -8,14 +8,20 @@
         (filterEvent)="filterBy = $event">
       </app-search>
 
-      <div class="players-grid">
-        <!-- Aplicamos el Pipe `playerFilter` a la lista de jugadores -->
-        <app-flip-card
-          *ngFor="let player of players
-                  | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
-          [player]="player">
-        </app-flip-card>
-      </div>
+      <!-- Comprobamos si ya llegaron los jugadores desde Firebase -->
+      <ng-container *ngIf="players$ | async as playersList">
+
+        <!-- Jugadores con estilo flip-card -->
+        <div class="players-grid">
+          <app-flip-card
+            *ngFor="let player of playersList
+              | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
+            [player]="player">
+          </app-flip-card>
+        </div>
+
+      </ng-container>
+
     </div>
   </div>
 </div>
