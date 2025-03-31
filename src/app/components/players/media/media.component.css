@@ -1,0 +1,11 @@
+.modal.show {
+  display: block !important; /* ✅ Asegura que el modal es visible */
+}
+
+.video-player {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block; /* ✅ Asegura que el video no esté oculto */
+  margin: 0 auto;
+}

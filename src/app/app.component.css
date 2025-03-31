@@ -1,0 +1,54 @@
+/* Archivo de estilos globales */
+
+:root {
+  --primary-color: #4A148C;
+  --secondary-color: #FF9800;
+  --background-light: #F8F9FA;
+  --background-hover: #EDE7F6;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --border-color: #BDBDBD;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-light);
+  color: var(--text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+

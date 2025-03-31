@@ -1,0 +1,21 @@
+<div class="container">
+  <div id="jugadores" class="container">
+    <div class="container">
+
+      <!-- Componente de búsqueda y filtros -->
+      <app-search
+        (searchEvent)="searchTerm = $event"
+        (filterEvent)="filterBy = $event">
+      </app-search>
+
+      <div class="players-grid">
+        <!-- Aplicamos el Pipe `playerFilter` a la lista de jugadores -->
+        <app-flip-card
+          *ngFor="let player of players
+                  | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
+          [player]="player">
+        </app-flip-card>
+      </div>
+    </div>
+  </div>
+</div>

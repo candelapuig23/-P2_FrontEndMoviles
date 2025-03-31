@@ -1,0 +1,11 @@
+.footer {
+    background-color: #FFA500 ;
+    color: #472c75 ;
+    text-align: center ;
+    padding: 20px ;
+    line-height: 0.75;
+    font-size: 20px ;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
