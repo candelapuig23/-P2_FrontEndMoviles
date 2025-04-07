@@ -49,7 +49,7 @@ export class ListComponent implements OnInit {
    MIGRACIÓN INICIAL
   * Este método sube los jugadores del archivo local `players.ts` a Firestore.
   * No ejecutar más
- */
+
   uploadPlayersToFirebase(): void {
     PLAYERS.forEach((player) => {
       this.ngZone.run(() => {
@@ -63,6 +63,6 @@ export class ListComponent implements OnInit {
           );
       });
     });
-  }
+  } */
 }
 

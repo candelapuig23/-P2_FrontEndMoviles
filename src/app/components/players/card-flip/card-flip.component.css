@@ -103,3 +103,20 @@
   background-color: #E68900;
 }
 
+.eliminar-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.eliminar-btn:hover {
+  background-color: red;
+}

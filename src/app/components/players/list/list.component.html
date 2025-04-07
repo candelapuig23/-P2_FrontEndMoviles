@@ -13,15 +13,17 @@
 
         <!-- Jugadores con estilo flip-card -->
         <div class="players-grid">
-          <app-flip-card
-            *ngFor="let player of playersList
-              | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
-            [player]="player">
-          </app-flip-card>
+          <!-- Bucle que incluye la tarjeta y el botón -->
+          <div *ngFor="let player of playersList
+                      | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
+              class="player-wrapper">
+
+            <!-- Tarjeta -->
+            <app-flip-card [player]="player">
+            </app-flip-card>
+
+
+          </div>
         </div>
 
       </ng-container>
-
-    </div>
-  </div>
-</div>
