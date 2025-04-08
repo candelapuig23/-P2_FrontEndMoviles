@@ -101,7 +101,7 @@ export class AddPlayerFormComponent {
 
     // Construïm les rutes relatives
     this.player.image = `assets/img/${this.selectedImageName}`;
-    this.player.videoFile = `assets/media/${this.selectedVideoName}`;
+    this.player.videoFile = this.selectedVideoName;
 
     // Guardem a Firestore
     this.firebaseService
