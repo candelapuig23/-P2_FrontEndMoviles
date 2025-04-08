@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="search-container">
   <!-- Buscador -->
   <div class="search-box">
@@ -59,3 +60,66 @@
     </div>
   </div>
 </div>
+=======
+<div class="search-container">
+  <!-- Buscador -->
+  <div class="search-box">
+    <label for="search-input"><strong>Buscar jugador</strong></label>
+    <input
+      type="text"
+      id="search-input"
+      [(ngModel)]="searchQuery"
+      placeholder="Escribe un nombre o número..."
+      (input)="onSearchChange()"
+    />
+  </div>
+
+  <!-- Contenedor del botón y dropdown -->
+  <div class="filter-container" (clickOutside)="closeFilters()">
+    <!-- Botón que activa el dropdown -->
+    <button class="filter-btn" (click)="toggleFilters()">
+      Filtrar por <!-- Flecha a la izquierda -->
+    </button>
+
+    <!-- Dropdown de filtros (se muestra solo si isFiltersVisible es true) -->
+    <div class="filter-dropdown" *ngIf="isFiltersVisible">
+      <!-- Botón de cerrar -->
+      <button class="close-btn" (click)="toggleFilters()">X</button>
+
+      <label for="position-filter">Posición:</label>
+      <select id="position-filter" [(ngModel)]="filterByPosition" (change)="onFilterChange()">
+        <option value="">Todos</option>
+        <option value="Point Guard">Point Guard</option>
+        <option value="Shooting Guard">Shooting Guard</option>
+        <option value="Small Forward">Small Forward</option>
+        <option value="Power Forward">Power Forward</option>
+        <option value="Center">Center</option>
+      </select>
+
+      <label for="height-filter">Altura:</label>
+      <select id="height-filter" [(ngModel)]="filterByHeight" (change)="onFilterChange()">
+        <option value="">Todos</option>
+        <option value="short">Menos de 6'6"</option>
+        <option value="medium">6'6" - 7'0"</option>
+        <option value="tall">Más de 7'0"</option>
+      </select>
+
+      <label for="weight-filter">Peso:</label>
+      <select id="weight-filter" [(ngModel)]="filterByWeight" (change)="onFilterChange()">
+        <option value="">Todos</option>
+        <option value="light">Menos de 200 lbs</option>
+        <option value="medium">200-250 lbs</option>
+        <option value="heavy">Más de 250 lbs</option>
+      </select>
+
+      <label for="age-filter">Edad:</label>
+      <select id="age-filter" [(ngModel)]="filterByAge" (change)="onFilterChange()">
+        <option value="">Todos</option>
+        <option value="young">Menos de 25</option>
+        <option value="middle">25-30</option>
+        <option value="old">Más de 30</option>
+      </select>
+    </div>
+  </div>
+</div>
+>>>>>>> recuperacio-players
