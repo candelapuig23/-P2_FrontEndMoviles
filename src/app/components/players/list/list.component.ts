@@ -8,6 +8,7 @@ import { FirebaseService } from '../../../services/firebase.service';
 import { Observable } from 'rxjs';
 import { PLAYERS } from '../../../data/players'; // 👈 Importamos el array local
 import { NgZone } from '@angular/core';
+import { AddPlayerFormComponent } from "../add-player-form/add-player-form.component";
 
 
 @Component({
@@ -22,7 +23,8 @@ import { NgZone } from '@angular/core';
     SearchComponent,
     FlipCardComponent,
     PlayerFilterPipe,
-  ],
+    AddPlayerFormComponent
+],
 })
 export class ListComponent implements OnInit {
   players$!: Observable<Player[]>;
@@ -43,6 +45,16 @@ export class ListComponent implements OnInit {
 
   toggleFlip(player: any) {
     player.isFlipped = !player.isFlipped;
+  }
+
+  mostrarForm: boolean = false;
+
+  mostrarFormulario() {
+    this.mostrarForm = true;
+  }
+
+  cerrarFormulario() {
+    this.mostrarForm = false;
   }
 
   /**
