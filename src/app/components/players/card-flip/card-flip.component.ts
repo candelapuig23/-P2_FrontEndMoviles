@@ -52,6 +52,13 @@ export class FlipCardComponent {
       }
     });
   }
+  @Output() edit = new EventEmitter<any>();
+
+emitEdit(event: Event) {
+  event.stopPropagation();
+  this.edit.emit(this.player);
+}
+
   constructor() {}
 
   toggleFlip() {

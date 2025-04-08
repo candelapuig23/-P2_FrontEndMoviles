@@ -3,9 +3,7 @@
     <div class="container">
 
       <!-- Componente de búsqueda y filtros -->
-      <app-search
-        (searchEvent)="searchTerm = $event"
-        (filterEvent)="filterBy = $event">
+      <app-search (searchEvent)="searchTerm = $event" (filterEvent)="filterBy = $event">
       </app-search>
 
       <!-- Comprobamos si ya llegaron los jugadores desde Firebase -->
@@ -13,17 +11,28 @@
 
         <!-- Jugadores con estilo flip-card -->
         <div class="players-grid">
-          <!-- Bucle que incluye la tarjeta y el botón -->
-          <div *ngFor="let player of playersList
+          <!-- Bucle que incluye la tarjeta y los botones -->
+          <div
+            *ngFor="let player of playersList
                       | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
-              class="player-wrapper">
+            class="player-wrapper">
 
-            <!-- Tarjeta -->
-            <app-flip-card [player]="player">
+            <!-- Tarjeta del jugador -->
+            <app-flip-card [player]="player" (delete)="player.id && firebaseService.deletePlayer(player.id)"
+
+              (edit)="onEditPlayer($event)">
             </app-flip-card>
-
 
           </div>
         </div>
 
+        <!-- Formulario de edición de jugador -->
+        <app-edit-player-form *ngIf="jugadorParaEditar" [player]="jugadorParaEditar" (playerUpdated)="onPlayerUpdated()"
+          (cancelEdit)="jugadorParaEditar = null">
+        </app-edit-player-form>
+
       </ng-container>
+
+    </div>
+  </div>
+</div>

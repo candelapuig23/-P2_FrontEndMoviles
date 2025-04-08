@@ -6,12 +6,18 @@
       <h3>{{ player.name }}</h3>
       <p><strong>Posición:</strong> {{ player.position }}</p>
       <p><strong>Número:</strong> #{{ player.number }}</p>
+    <div class="d-flex gap-1 mt-2 justify-content-center">
       <!-- Botón de eliminar -->
-              <button class="btn btn-danger btn-sm eliminar-btn" (click)="emitDelete($event)">
-                🗑
-              </button>
-
+      <button class="btn btn-danger btn-sm" (click)="emitDelete($event)">
+        🗑
+      </button>
+    
+      <!-- Botón de editar -->
+      <button class="btn btn-warning btn-sm" (click)="emitEdit($event)">
+        ✏️
+      </button>
     </div>
+
 
     <!-- Cara Trasera -->
         <div class="back">
