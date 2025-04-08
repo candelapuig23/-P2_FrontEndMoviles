@@ -94,7 +94,7 @@ export class EditPlayerFormComponent {
     const updatedData = {
       ...this.player,
       image: `assets/img/${this.selectedImageName}`,
-      videoFile: `assets/media/${this.selectedVideoName}`,
+      videoFile: this.selectedVideoName,
     };
 
     if (!this.player.id) {
