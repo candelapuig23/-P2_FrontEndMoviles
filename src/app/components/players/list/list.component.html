@@ -1,14 +1,16 @@
 <div class="container">
   <div id="jugadores" class="container">
     <div class="container">
-      <!-- Filtro -->
-      <app-search
-        (searchEvent)="searchTerm = $event"
-        (filterEvent)="filterBy = $event">
-      </app-search>
 
-      <!-- Botón añadir con ícono Bootstrap -->
-      <div class="d-flex justify-content-end mb-3">
+      <!-- Fila de búsqueda y botón centrados -->
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4">
+        <!-- Componente de búsqueda -->
+        <app-search
+          (searchEvent)="searchTerm = $event"
+          (filterEvent)="filterBy = $event">
+        </app-search>
+
+        <!-- Botón añadir jugador -->
         <button class="btn btn-success d-flex align-items-center gap-2" (click)="mostrarFormulario()">
           <i class="bi bi-plus-circle"></i>
           Añadir jugador
@@ -45,6 +47,7 @@
           </div>
         </div>
       </ng-container>
+
     </div>
   </div>
 </div>

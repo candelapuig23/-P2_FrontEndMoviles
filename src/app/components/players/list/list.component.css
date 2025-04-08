@@ -1,5 +1,4 @@
 
-
 /* Centrar los jugadores en cualquier cantidad */
 .players-grid {
   display: grid;
@@ -32,4 +31,10 @@
   background-color: #fbc02d;
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+app-search {
+  display: block;
+  width: 100%;
 }
