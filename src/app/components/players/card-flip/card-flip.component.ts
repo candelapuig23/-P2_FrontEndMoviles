@@ -57,12 +57,19 @@ export class FlipCardComponent {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#212121',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.delete.emit(this.player.id);
+        this.delete.emit(this.player.id); // Emitimos el evento
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado',
+          text: `${this.player.name} ha sido eliminado correctamente`,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#14a44d'
+        });
       }
     });
   }

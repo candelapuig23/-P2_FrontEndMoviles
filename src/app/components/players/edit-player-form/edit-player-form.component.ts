@@ -27,7 +27,7 @@ export class EditPlayerFormComponent {
     'terry.png',
     'davis.png',
     'brown.png',
-    'bruzelis.png',
+    'buzelis.png',
     'doncic.png',
     'embiid.png',
     'giannis.png',
@@ -103,15 +103,26 @@ export class EditPlayerFormComponent {
     }
     this.firebaseService
       .updatePlayer(this.player.id, updatedData)
-
       .then(() => {
-        Swal.fire('✅ Éxito', 'Jugador actualizado correctamente', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Jugador actualizado',
+          text: `${this.player.name} ha sido modificado correctamente.`,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#28a745',
+        });
         this.playerUpdated.emit();
         this.cancelar();
       })
       .catch((err) => {
         console.error('❌ Error al actualizar jugador:', err);
-        Swal.fire('Error', 'No se pudo actualizar el jugador', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se ha podido actualizar el jugador.',
+          confirmButtonText: 'Cerrar',
+          confirmButtonColor: '#6c757d',
+        });
       });
   }
 }

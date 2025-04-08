@@ -36,7 +36,7 @@ export class AddPlayerFormComponent {
     'terry.png',
     'davis.png',
     'brown.png',
-    'bruzelis.png',
+    'buzelis.png',
     'doncic.png',
     'embiid.png',
     'giannis.png',
@@ -107,13 +107,26 @@ export class AddPlayerFormComponent {
     this.firebaseService
       .addPlayer(this.player)
       .then(() => {
-        Swal.fire('✅ Èxit', 'Jugador afegit correctament', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Jugador añadido',
+          text: `${this.player.name} ha sido guardado correctamente.`,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#28a745',
+        });
         this.playerAdded.emit();
         this.cancelar();
       })
       .catch((err) => {
         console.error('❌ Error al afegir jugador:', err);
-        Swal.fire('Error', 'No s’ha pogut afegir el jugador', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se ha podido añadir el jugador.',
+          confirmButtonText: 'Cerrar',
+          confirmButtonColor: '#6c757d',
+        });
       });
+
   }
 }
