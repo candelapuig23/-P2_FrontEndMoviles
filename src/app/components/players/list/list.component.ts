@@ -6,10 +6,8 @@ import { Player } from '../player/player.model';
 import { PlayerFilterPipe } from '../../pipes/player-filter.pipe';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Observable } from 'rxjs';
-import { PLAYERS } from '../../../data/players'; // 👈 Importamos el array local
-import { NgZone } from '@angular/core';
-import { AddPlayerFormComponent } from "../add-player-form/add-player-form.component";
-
+import { AddPlayerFormComponent } from '../add-player-form/add-player-form.component';
+import { EditPlayerFormComponent } from '../edit-player-form/edit-player-form.component';
 
 @Component({
   selector: 'app-list',
@@ -23,31 +21,23 @@ import { AddPlayerFormComponent } from "../add-player-form/add-player-form.compo
     SearchComponent,
     FlipCardComponent,
     PlayerFilterPipe,
-    AddPlayerFormComponent
-],
+    AddPlayerFormComponent,
+    EditPlayerFormComponent,
+  ],
 })
 export class ListComponent implements OnInit {
   players$!: Observable<Player[]>;
   searchTerm: string = '';
   filterBy: any = {};
 
-  constructor(
-    private firebaseService: FirebaseService,
-    private ngZone: NgZone
-  ) {}
+  mostrarForm: boolean = false;
+  jugadorParaEditar: Player | null = null;
+
+  constructor(public firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.players$ = this.firebaseService.getPlayers();
-
-    // No ejecutar: solo para migración inicial de datos desde archivo local a Firebase
-    // this.uploadPlayersToFirebase();
   }
-
-  toggleFlip(player: any) {
-    player.isFlipped = !player.isFlipped;
-  }
-
-  mostrarForm: boolean = false;
 
   mostrarFormulario() {
     this.mostrarForm = true;
@@ -57,24 +47,17 @@ export class ListComponent implements OnInit {
     this.mostrarForm = false;
   }
 
-  /**
-   MIGRACIÓN INICIAL
-  * Este método sube los jugadores del archivo local `players.ts` a Firestore.
-  * No ejecutar más
+  onPlayerUpdated() {
+    this.jugadorParaEditar = null;
+  }
 
-  uploadPlayersToFirebase(): void {
-    PLAYERS.forEach((player) => {
-      this.ngZone.run(() => {
-        this.firebaseService
-          .addPlayer(player)
-          .then(() =>
-            console.log(`Jugador ${player.name} añadido correctamente.`)
-          )
-          .catch((error) =>
-            console.error(`Error al subir jugador ${player.name}:`, error)
-          );
-      });
+  editarJugador(player: Player) {
+    this.jugadorParaEditar = player;
+  }
+
+  eliminarJugador(id: string) {
+    this.firebaseService.deletePlayer(id).then(() => {
+      console.log(`Jugador ${id} eliminado`);
     });
-  } */
+  }
 }
-

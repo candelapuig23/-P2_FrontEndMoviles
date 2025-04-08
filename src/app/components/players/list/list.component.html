@@ -1,42 +1,47 @@
 <div class="container">
   <div id="jugadores" class="container">
     <div class="container">
-
-      <!-- Componente de búsqueda y filtros -->
+      <!-- Filtro -->
       <app-search
         (searchEvent)="searchTerm = $event"
         (filterEvent)="filterBy = $event">
       </app-search>
 
-      <!-- Botón para añadir nuevo jugador (fuera del ngIf para que siempre esté visible) -->
+      <!-- Botón añadir -->
       <div class="d-flex justify-content-end mb-3">
         <button class="btn btn-primary" (click)="mostrarFormulario()">➕ Añadir jugador</button>
       </div>
 
-      <!-- Formulario modal -->
+      <!-- Formulario añadir -->
       <app-add-player-form
         *ngIf="mostrarForm"
         (formCancel)="cerrarFormulario()"
         (playerAdded)="cerrarFormulario()">
       </app-add-player-form>
 
-      <!-- Comprobamos si ya llegaron los jugadores desde Firebase -->
+      <!-- Formulario editar -->
+      <app-edit-player-form
+        *ngIf="jugadorParaEditar"
+        [player]="jugadorParaEditar"
+        (playerUpdated)="onPlayerUpdated()"
+        (cancelEdit)="jugadorParaEditar = null">
+      </app-edit-player-form>
+
+      <!-- Lista jugadores -->
       <ng-container *ngIf="players$ | async as playersList">
-
-        <!-- Jugadores con estilo flip-card -->
         <div class="players-grid">
-          <div *ngFor="let player of playersList
-                      | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
-              class="player-wrapper">
-
-            <!-- Tarjeta -->
-            <app-flip-card [player]="player"></app-flip-card>
-
+          <div
+            *ngFor="let player of playersList | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"
+            class="player-wrapper"
+          >
+            <app-flip-card
+              [player]="player"
+              (edit)="editarJugador($event)"
+              (delete)="eliminarJugador($event)">
+            </app-flip-card>
           </div>
         </div>
-
       </ng-container>
-
     </div>
   </div>
 </div>

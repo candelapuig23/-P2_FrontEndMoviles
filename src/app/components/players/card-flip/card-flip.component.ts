@@ -29,9 +29,23 @@ export class FlipCardComponent {
   static activeCard: FlipCardComponent | null = null;
 
   @ViewChild(MediaComponent) mediaComponent!: MediaComponent;
-
   @Output() delete = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<any>();
 
+  emitEdit(event: Event) {
+    event.stopPropagation();
+    this.edit.emit(this.player);
+  }
+
+  constructor() {}
+
+  toggleFlip() {
+    if (FlipCardComponent.activeCard && FlipCardComponent.activeCard !== this) {
+      FlipCardComponent.activeCard.isFlipped = false;
+    }
+    this.isFlipped = !this.isFlipped;
+    FlipCardComponent.activeCard = this.isFlipped ? this : null;
+  }
 
   // Botó per eliminar el jugador + confirmació popUp SweetAlert
   emitDelete(event: Event) {
@@ -51,15 +65,6 @@ export class FlipCardComponent {
         this.delete.emit(this.player.id);
       }
     });
-  }
-  constructor() {}
-
-  toggleFlip() {
-    if (FlipCardComponent.activeCard && FlipCardComponent.activeCard !== this) {
-      FlipCardComponent.activeCard.isFlipped = false;
-    }
-    this.isFlipped = !this.isFlipped;
-    FlipCardComponent.activeCard = this.isFlipped ? this : null;
   }
 
   openVideo(event: Event) {
