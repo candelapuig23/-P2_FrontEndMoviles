@@ -86,37 +86,70 @@
   color: white;
 }
 
-/* Botón */
-.btn-highlight {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-.btn-highlight:hover {
-  background-color: #E68900;
-}
-
-.eliminar-btn {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+/* Contenedor de botones en esquinas */
+.button-container {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+/* Estilo común */
+.button-container button {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Eliminar: negro → rojo */
+.eliminar-btn {
+  background-color: #000;
+  color: white;
+  border: none;
 }
 
 .eliminar-btn:hover {
   background-color: red;
+  transform: scale(1.15);
+}
+
+/* Editar: lila → naranja */
+.editar-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.editar-btn:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.15);
+}
+
+/* Botón de video */
+.btn-info {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-info:hover {
+  background-color: #fbc02d;
+  transform: scale(1.1);
 }
