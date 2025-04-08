@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlipCardComponent } from './card-flip.component';
+import { AddPlayerFormComponent } from './add-player-form.component';
 
-describe('CardFlipComponent', () => {
-  let component: FlipCardComponent;
-  let fixture: ComponentFixture<FlipCardComponent>;
+describe('AddPlayerFormComponent', () => {
+  let component: AddPlayerFormComponent;
+  let fixture: ComponentFixture<AddPlayerFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlipCardComponent]
+      imports: [AddPlayerFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FlipCardComponent);
+    fixture = TestBed.createComponent(AddPlayerFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

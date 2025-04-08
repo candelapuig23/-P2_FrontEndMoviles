@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { SearchComponent } from '../../shared/search/search.component';
 import { FlipCardComponent } from '../card-flip/card-flip.component';
-import { PLAYERS } from '../../../data/players'; //hacemos la importación del Array de jugadores
-import { Player } from '../player/player.model'; // importamos la interfaz
-import { PlayerFilterPipe } from '../../pipes/player-filter.pipe'; // IMPORTAMOS EL PIPE del filtro
+import { Player } from '../player/player.model';
+import { PlayerFilterPipe } from '../../pipes/player-filter.pipe';
+import { FirebaseService } from '../../../services/firebase.service';
+import { Observable } from 'rxjs';
+import { PLAYERS } from '../../../data/players';
+import { NgZone } from '@angular/core';
+import { AddPlayerFormComponent } from '../add-player-form/add-player-form.component';
 
 
 
@@ -12,18 +16,70 @@ import { PlayerFilterPipe } from '../../pipes/player-filter.pipe'; // IMPORTAMOS
   selector: 'app-list',
   standalone: true,
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css',
-
-  imports: [NgFor, SearchComponent, FlipCardComponent, PlayerFilterPipe],
+  styleUrls: ['./list.component.css'],
+  imports: [
+    NgFor,
+    NgIf,
+    AsyncPipe,
+    SearchComponent,
+    FlipCardComponent,
+    PlayerFilterPipe,
+    AddPlayerFormComponent,
+  ],
 })
-export class ListComponent {
-  players: Player[] = PLAYERS;
+export class ListComponent implements OnInit {
+  players$!: Observable<Player[]>;
   searchTerm: string = '';
   filterBy: any = {};
-  /**
-   * Método para manejar la lógica del componente FlipCard
-   */
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private ngZone: NgZone
+  ) {}
+
+  ngOnInit(): void {
+    this.players$ = this.firebaseService.getPlayers();
+
+    // No ejecutar: solo para migración inicial de datos desde archivo local a Firebase
+    // this.uploadPlayersToFirebase();
+  }
+
   toggleFlip(player: any) {
     player.isFlipped = !player.isFlipped;
   }
+
+  /**
+   MIGRACIÓN INICIAL
+  * Este método sube los jugadores del archivo local `players.ts` a Firestore.
+  * No ejecutar más
+
+  uploadPlayersToFirebase(): void {
+    PLAYERS.forEach((player) => {
+      this.ngZone.run(() => {
+        this.firebaseService
+          .addPlayer(player)
+          .then(() =>
+            console.log(`Jugador ${player.name} añadido correctamente.`)
+          )
+          .catch((error) =>
+            console.error(`Error al subir jugador ${player.name}:`, error)
+          );
+      });
+    });
+  } */
+
+  reloadPlayers() {
+    this.players$ = this.firebaseService.getPlayers();
+  }
+
+  mostrarFormulario: boolean = false;
+
+  abrirFormulario() {
+    this.mostrarFormulario = true;
+  }
+
+  cerrarFormulario() {
+    this.mostrarFormulario = false;
+  }
 }
+

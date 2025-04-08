@@ -6,6 +6,11 @@
       <h3>{{ player.name }}</h3>
       <p><strong>Posición:</strong> {{ player.position }}</p>
       <p><strong>Número:</strong> #{{ player.number }}</p>
+      <!-- Botón de eliminar -->
+              <button class="btn btn-danger btn-sm eliminar-btn" (click)="emitDelete($event)">
+                🗑
+              </button>
+
     </div>
 
     <!-- Cara Trasera -->

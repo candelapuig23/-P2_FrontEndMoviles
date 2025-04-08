@@ -1,7 +1,9 @@
-import { Component, Input, ViewChild} from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { MediaComponent } from '../media/media.component';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -28,6 +30,28 @@ export class FlipCardComponent {
 
   @ViewChild(MediaComponent) mediaComponent!: MediaComponent;
 
+  @Output() delete = new EventEmitter<string>();
+
+
+  // Botó per eliminar el jugador + confirmació popUp SweetAlert
+  emitDelete(event: Event) {
+    event.stopPropagation();
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Quieres eliminar a ${this.player.name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete.emit(this.player.id);
+      }
+    });
+  }
   constructor() {}
 
   toggleFlip() {
