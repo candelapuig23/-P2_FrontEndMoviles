@@ -138,3 +138,30 @@ input.form-control {
     font-size: 0.9rem;
   }
 }
+
+
+.popover-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
+}
+
+/* Botón de restablecer con texto al lado izquierdo */
+.btn-reset-bottom {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+.btn-reset-bottom:hover {
+  color: var(--secondary-color);
+}
+
+/* Texto al lado del icono */
+.reset-text {
+  font-size: 0.85rem;
+}

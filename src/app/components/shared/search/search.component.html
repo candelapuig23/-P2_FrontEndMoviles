@@ -39,6 +39,9 @@
             <i class="bi bi-x-lg"></i>
           </button>
 
+          <!-- Título del popover -->
+          <h5 class="popover-title text-center" >FILTRO</h5>
+
           <div class="row">
             <div class="col-md-6 col-12">
               <!-- Posición -->
@@ -91,11 +94,14 @@
             </div>
           </div>
 
-          <!-- Botón restablecer -->
-          <button type="button" class="btn-reset-bottom" (click)="resetFilters()" aria-label="Restablecer">
-            <i class="bi bi-arrow-counterclockwise"></i>
-          </button>
-      </ng-template>
+            <!-- Botón restablecer con texto a la izquierda -->
+            <div class="d-flex align-items-center justify-content-start mt-2">
+              <button type="button" class="btn-reset-bottom" (click)="resetFilters()" aria-label="Restablecer">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> <!-- icono con margen -->
+                <span class="reset-text">Borrar filtros</span>
+              </button>
+            </div>
+                </ng-template>
 
     </div>
   </div>
