@@ -1,7 +1,9 @@
-<!-- Botón flotante para abrir/cerrar el sidebar -->
-<button class="sidebar-toggle" (click)="toggleSidebar()" title="Menú">
-  <i class="bi bi-list"></i>
-</button>
+<!-- Contenedor que incluye tanto el botón como el sidebar -->
+<div class="sidebar-wrapper" [class.open]="sidebarOpen">
+  <!-- Botón flotante para abrir/cerrar el sidebar -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()" title="Menú">
+    <i class="bi bi-list"></i>
+  </button>
 
 <!-- Sidebar -->
 <div class="sidebar" [class.open]="sidebarOpen">
@@ -17,6 +19,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Contacto</a>
-    </li>
-  </ul>
+     </li>
+    </ul>
+  </div>
 </div>
