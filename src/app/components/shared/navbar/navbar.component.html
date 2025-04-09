@@ -1,10 +1,22 @@
-<nav class="navbar navbar-light bg-light">
-  <div class="nav-logo">
-    <img src="assets/img/favicon.png" alt="Logo">
-  </div>
-  <ul class="nav-links">
-    <li><a href="#jugadores">Jugadores</a></li>
-    <li><a href="#">Mi Perfil</a></li>
-    <li><a href="#">Contacto</a></li>
+<!-- Botón flotante para abrir/cerrar el sidebar -->
+<button class="sidebar-toggle" (click)="toggleSidebar()" title="Menú">
+  <i class="bi bi-list"></i>
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="sidebarOpen">
+  <ul class="nav flex-column p-3">
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Inicio</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="#"><i class="bi bi-people me-2"></i>Jugadores</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="#"><i class="bi bi-person me-2"></i>Mi Perfil</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="bi bi-envelope me-2"></i>Contacto</a>
+    </li>
   </ul>
-</nav>
+</div>

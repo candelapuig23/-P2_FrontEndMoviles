@@ -1,0 +1,12 @@
+.main-content {
+  transition: margin-left 0.3s ease;
+  margin-left: 250px;
+  /* espacio para el sidebar si está abierto */
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
