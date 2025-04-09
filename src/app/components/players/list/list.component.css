@@ -14,27 +14,22 @@
   margin: 0 auto;
 }
 
-.btn-add-player {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.btn-add-player:hover {
-  background-color: #fbc02d;
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-
 app-search {
   display: block;
   width: 100%;
+}
+
+
+.btn-success.custom-add {
+  background-color: #198754;
+  /* color original success */
+  border-color: #198754;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success.custom-add:hover {
+  background-color: var(--secondary-color);
+  /* tu naranja */
+  border-color: var(--secondary-color);
+  transform: scale(1.5);
 }

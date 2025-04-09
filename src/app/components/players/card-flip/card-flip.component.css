@@ -121,7 +121,7 @@
 
 .eliminar-btn:hover {
   background-color: red;
-  transform: scale(1.15);
+  transform: scale(1.5);
 }
 
 /* Editar: lila → naranja */
@@ -133,7 +133,7 @@
 
 .editar-btn:hover {
   background-color: var(--secondary-color);
-  transform: scale(1.15);
+  transform: scale(1.5);
 }
 
 /* Botón de video */
@@ -151,5 +151,5 @@
 
 .btn-info:hover {
   background-color: #fbc02d;
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
