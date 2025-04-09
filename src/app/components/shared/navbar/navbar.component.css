@@ -32,7 +32,6 @@
 
 .sidebar .nav {
   margin-top: 80px;
-  /* Ajusta este valor para bajar los enlaces */
 }
 
 .toggle-btn {
@@ -40,7 +39,6 @@
   top: 10px;
   left: 10px;
   z-index: 1000;
-  /*background: white;*/
   border-radius: 8px;
   padding: 6px 10px;
   border: 1px solid #ccc;
@@ -53,4 +51,5 @@
 
 .nav-link:hover {
   color: var(--primary-color);
+  transform: scale(1.1);
 }

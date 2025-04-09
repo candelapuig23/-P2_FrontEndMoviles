@@ -1,11 +1,9 @@
-.footer {
-    background-color: #FFA500 ;
-    color: #472c75 ;
-    text-align: center ;
-    padding: 20px ;
-    line-height: 0.75;
-    font-size: 20px ;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
+.footer-custom {
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 14px;
+  font-weight: normal;
+  /* <-- Esto quita la negrita */
+  border-top: 3px solid var(--secondary-color);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
-
