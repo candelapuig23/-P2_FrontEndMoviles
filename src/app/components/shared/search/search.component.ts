@@ -2,11 +2,6 @@ import { Component, EventEmitter, Output, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-/* Este component gestiona el campo de búsqueda y emite eventos. Lo podremos reutilizar más adelante.
-  Ejemplo: Búsqueda de entrenador, etc. Porqué la lógica del filtro de búsqueda de los jugadores está
-  dentro del componente de list.
-*/
-
 @Component({
   selector: 'app-search',
   standalone: true,

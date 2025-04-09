@@ -1,26 +1,30 @@
+
+<div class="d-flex justify-content-center">
 <div class="search-container">
-  <!-- Buscador -->
-  <div class="search-box">
-    <label for="search-input"><strong>Buscar jugador</strong></label>
+
+  <!-- Buscador con ícono -->
+  <div class="search-box input-group">
+    <span class="input-group-text">
+      <i class="bi bi-search"></i>
+    </span>
     <input
       type="text"
       id="search-input"
+      class="form-control"
       [(ngModel)]="searchQuery"
-      placeholder="Escribe un nombre o número..."
-      (input)="onSearchChange()"
-    />
+      placeholder="Buscar jugador..."
+      (input)="onSearchChange()" />
   </div>
 
   <!-- Contenedor del botón y dropdown -->
   <div class="filter-container" (clickOutside)="closeFilters()">
     <!-- Botón que activa el dropdown -->
     <button class="filter-btn" (click)="toggleFilters()">
-      Filtrar por <!-- Flecha a la izquierda -->
+      Filtrar por
     </button>
 
-    <!-- Dropdown de filtros (se muestra solo si isFiltersVisible es true) -->
+    <!-- Dropdown de filtros -->
     <div class="filter-dropdown" *ngIf="isFiltersVisible">
-      <!-- Botón de cerrar -->
       <button class="close-btn" (click)="toggleFilters()">X</button>
 
       <label for="position-filter">Posición:</label>
@@ -58,4 +62,5 @@
       </select>
     </div>
   </div>
+</div>
 </div>
