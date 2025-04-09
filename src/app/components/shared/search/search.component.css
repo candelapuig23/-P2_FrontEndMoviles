@@ -1,3 +1,6 @@
+/* -----------------------------------------
+   Estilos del buscador con ícono (lupa)
+------------------------------------------ */
 .search-box {
   display: flex;
   align-items: center;
@@ -17,8 +20,11 @@ input.form-control {
   border-radius: 0 8px 8px 0;
 }
 
+
+/* -----------------------------------------
+   Botón de filtros (fuera del popover)
+------------------------------------------ */
 .filter-btn {
-  background: var(--primary-color);
   color: white;
   height: 38px;
   padding: 6px 15px;
@@ -34,6 +40,10 @@ input.form-control {
   transform: scale(1.05);
 }
 
+
+/* -----------------------------------------
+   Contenedor del buscador y filtros
+------------------------------------------ */
 .search-wrapper {
   max-width: 900px;
   width: 100%;
@@ -45,4 +55,86 @@ input.form-control {
   align-items: center;
   gap: 15px;
   width: 100%;
+}
+
+
+/* -----------------------------------------
+   Contenedor personalizado del popover
+   (este es el contenedor que genera MDB)
+------------------------------------------ */
+::ng-deep .popover-body {
+  background-color: white!important;
+  color: white;
+  padding: 20px;
+  padding-top: 30px;
+  padding-bottom: 40px;;
+  border-radius: 10px;
+  width: 90vw;
+  max-width: 700px;
+  min-width: 300px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+
+/* -----------------------------------------
+   Botón de cerrar (arriba derecha del popover)
+------------------------------------------ */
+.btn-close-top {
+  position:absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+
+/* -----------------------------------------
+   Botón para restablecer filtros (abajo derecha)
+------------------------------------------ */
+.btn-reset-bottom {
+  position:absolute;
+  background: none;
+  border: none;
+  bottom: 10px;
+  left: 10px;
+  color: var(--primary-color);
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.btn-reset-bottom:hover {
+  color: var(--secondary-color);
+}
+
+
+/* -----------------------------------------
+   Iconos accesibles
+------------------------------------------ */
+.btn i {
+  pointer-events: none;
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 576px) {
+  ::ng-deep .popover-body {
+    width: 95vw;
+    padding: 15px;
+  }
+
+  ::ng-deep .popover-body select,
+  ::ng-deep .popover-body .form-control {
+    font-size: 14px;
+  }
+
+  ::ng-deep .btn-reset-bottom {
+    font-size: 0.9rem;
+  }
+
+  ::ng-deep .btn-close-top {
+    font-size: 0.9rem;
+  }
 }

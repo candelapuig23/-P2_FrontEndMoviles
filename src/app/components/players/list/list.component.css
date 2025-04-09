@@ -22,6 +22,7 @@ app-search {
 
 .btn-success.custom-add {
   background-color: #198754;
+  margin-top: 20px;
   /* color original success */
   border-color: #198754;
   transition: background-color 0.3s ease, transform 0.2s ease;

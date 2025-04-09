@@ -1,66 +1,102 @@
-
 <div class="d-flex justify-content-center">
-<div class="search-container">
+  <div class="search-container">
+    <!-- Buscador con ícono -->
+    <div class="search-box input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+      <input
+        type="text"
+        id="search-input"
+        class="form-control"
+        [(ngModel)]="searchQuery"
+        placeholder="Buscar jugador..."
+        (input)="onSearchChange()" />
+    </div>
 
-  <!-- Buscador con ícono -->
-  <div class="search-box input-group">
-    <span class="input-group-text">
-      <i class="bi bi-search"></i>
-    </span>
-    <input
-      type="text"
-      id="search-input"
-      class="form-control"
-      [(ngModel)]="searchQuery"
-      placeholder="Buscar jugador..."
-      (input)="onSearchChange()" />
-  </div>
+    <!-- Filtros -->
+    <div class="filter-container">
+      <!-- Botón que activa el popover -->
+      <button
+        #popover="mdbPopover"
+        [mdbPopover]="filtrosTemplate"
+        triggers="click"
+        placement="right"
+        container="body"
+        popoverClass="no-style-popover"
+        type="button"
+        class="btn btn-secondary"
+        aria-label="Filtros">
+        <i class="bi bi-filter"></i>
+      </button>
 
-  <!-- Contenedor del botón y dropdown -->
-  <div class="filter-container" (clickOutside)="closeFilters()">
-    <!-- Botón que activa el dropdown -->
-    <button class="filter-btn" (click)="toggleFilters()">
-      Filtrar por
-    </button>
 
-    <!-- Dropdown de filtros -->
-    <div class="filter-dropdown" *ngIf="isFiltersVisible">
-      <button class="close-btn" (click)="toggleFilters()">X</button>
 
-      <label for="position-filter">Posición:</label>
-      <select id="position-filter" [(ngModel)]="filterByPosition" (change)="onFilterChange()">
-        <option value="">Todos</option>
-        <option value="Point Guard">Point Guard</option>
-        <option value="Shooting Guard">Shooting Guard</option>
-        <option value="Small Forward">Small Forward</option>
-        <option value="Power Forward">Power Forward</option>
-        <option value="Center">Center</option>
-      </select>
+      <!-- Contenido del Popover -->
+      <ng-template #filtrosTemplate>
+          <!-- Botón cerrar -->
+          <button type="button" class="btn-close-top" (click)="cerrarPopover()" aria-label="Cerrar">
+            <i class="bi bi-x-lg"></i>
+          </button>
 
-      <label for="height-filter">Altura:</label>
-      <select id="height-filter" [(ngModel)]="filterByHeight" (change)="onFilterChange()">
-        <option value="">Todos</option>
-        <option value="short">Menos de 6'6"</option>
-        <option value="medium">6'6" - 7'0"</option>
-        <option value="tall">Más de 7'0"</option>
-      </select>
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <!-- Posición -->
+              <div class="form-group mb-3">
+                <label for="position-filter">Posición:</label>
+                <select id="position-filter" class="form-control" [(ngModel)]="filterByPosition" (change)="onFilterChange()">
+                  <option value="">Todos</option>
+                  <option value="Point Guard">Point Guard</option>
+                  <option value="Shooting Guard">Shooting Guard</option>
+                  <option value="Small Forward">Small Forward</option>
+                  <option value="Power Forward">Power Forward</option>
+                  <option value="Center">Center</option>
+                </select>
+              </div>
 
-      <label for="weight-filter">Peso:</label>
-      <select id="weight-filter" [(ngModel)]="filterByWeight" (change)="onFilterChange()">
-        <option value="">Todos</option>
-        <option value="light">Menos de 200 lbs</option>
-        <option value="medium">200-250 lbs</option>
-        <option value="heavy">Más de 250 lbs</option>
-      </select>
+              <!-- Altura -->
+              <div class="form-group mb-3">
+                <label for="height-filter">Altura:</label>
+                <select id="height-filter" class="form-control" [(ngModel)]="filterByHeight" (change)="onFilterChange()">
+                  <option value="">Todos</option>
+                  <option value="short">Menos de 6'6"</option>
+                  <option value="medium">6'6" - 7'0"</option>
+                  <option value="tall">Más de 7'0"</option>
+                </select>
+              </div>
+            </div>
 
-      <label for="age-filter">Edad:</label>
-      <select id="age-filter" [(ngModel)]="filterByAge" (change)="onFilterChange()">
-        <option value="">Todos</option>
-        <option value="young">Menos de 25</option>
-        <option value="middle">25-30</option>
-        <option value="old">Más de 30</option>
-      </select>
+            <div class="col-md-6 col-12">
+              <!-- Peso -->
+              <div class="form-group mb-3">
+                <label for="weight-filter">Peso:</label>
+                <select id="weight-filter" class="form-control" [(ngModel)]="filterByWeight" (change)="onFilterChange()">
+                  <option value="">Todos</option>
+                  <option value="light">Menos de 200 lbs</option>
+                  <option value="medium">200-250 lbs</option>
+                  <option value="heavy">Más de 250 lbs</option>
+                </select>
+              </div>
+
+              <!-- Edad -->
+              <div class="form-group mb-3">
+                <label for="age-filter">Edad:</label>
+                <select id="age-filter" class="form-control" [(ngModel)]="filterByAge" (change)="onFilterChange()">
+                  <option value="">Todos</option>
+                  <option value="young">Menos de 25</option>
+                  <option value="middle">25-30</option>
+                  <option value="old">Más de 30</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón restablecer -->
+          <button type="button" class="btn-reset-bottom" (click)="resetFilters()" aria-label="Restablecer">
+            <i class="bi bi-arrow-counterclockwise"></i>
+          </button>
+      </ng-template>
+
     </div>
   </div>
-</div>
 </div>

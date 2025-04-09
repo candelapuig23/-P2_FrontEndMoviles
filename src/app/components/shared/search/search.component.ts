@@ -1,59 +1,62 @@
-import { Component, EventEmitter, Output, HostListener } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { MdbPopoverDirective, MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, MdbPopoverModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css',
+  styleUrls: ['./search.component.css'],
+
 })
 export class SearchComponent {
   searchQuery: string = '';
-  isFiltersVisible: boolean = false;
-
   filterByPosition: string = '';
   filterByHeight: string = '';
   filterByWeight: string = '';
   filterByAge: string = '';
-  filterByPPG: string = '';
-  filterByRPG: string = '';
-  filterByAPG: string = '';
 
-  // Emisor de eventos
   @Output() searchEvent = new EventEmitter<string>();
   @Output() filterEvent = new EventEmitter<any>();
 
-  onSearchChange() {
+  // Referencia al popover
+  @ViewChild('popover', { static: false }) popover!: MdbPopoverDirective;
+
+  // Emitir búsqueda al escribir
+  onSearchChange(): void {
     this.searchEvent.emit(this.searchQuery);
   }
 
-  onFilterChange() {
+  // Emitir filtros al cambiar
+  onFilterChange(): void {
     this.filterEvent.emit({
-      position: this.filterByPosition || '',
-      height: this.filterByHeight || '',
-      weight: this.filterByWeight || '',
-      age: this.filterByAge || '',
-      ppg: this.filterByPPG || '',
-      rpg: this.filterByRPG || '',
-      apg: this.filterByAPG || '',
+      position: this.filterByPosition,
+      height: this.filterByHeight,
+      weight: this.filterByWeight,
+      age: this.filterByAge,
     });
   }
 
-  toggleFilters() {
-    this.isFiltersVisible = !this.isFiltersVisible;
+  // Restablecer filtros
+  resetFilters(): void {
+    this.filterByPosition = '';
+    this.filterByHeight = '';
+    this.filterByWeight = '';
+    this.filterByAge = '';
+    this.onFilterChange();
   }
 
-  closeFilters() {
-    this.isFiltersVisible = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  handleClickOutside(event: Event) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.filter-container')) {
-      this.closeFilters();
+  // Cerrar el popover
+  cerrarPopover(): void {
+    if (this.popover) {
+      this.popover.hide();
     }
+  }
+
+  // Alternativo por compatibilidad
+  closeFilters(): void {
+    this.cerrarPopover();
   }
 }
