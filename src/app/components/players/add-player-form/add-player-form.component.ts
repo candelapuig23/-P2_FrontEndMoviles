@@ -2,131 +2,86 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../../services/firebase.service';
-import Swal from 'sweetalert2';
+import { Player } from '../player/player.model';
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from '@angular/fire/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-player-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './add-player-form.component.html',
   styleUrls: ['./add-player-form.component.css'],
+  imports: [CommonModule, FormsModule],
 })
 export class AddPlayerFormComponent {
   @Output() playerAdded = new EventEmitter<void>();
   @Output() formCancel = new EventEmitter<void>();
 
-  player = {
+  player: Player = {
     name: '',
-    position: '',
     number: 0,
+    position: '',
+    image: '',
     height: '',
     weight: '',
     age: 0,
     ppg: 0,
     rpg: 0,
     apg: 0,
-    image: '',
     videoFile: '',
   };
 
-  // Arxius disponibles a assets/img i assets/media
-  availableImages: string[] = [
-    'lebron.png',
-    'tatum.png',
-    'terry.png',
-    'davis.png',
-    'brown.png',
-    'buzelis.png',
-    'doncic.png',
-    'embiid.png',
-    'giannis.png',
-    'hauser.png',
-    'klay.png',
-    'miller.png',
-    'moody.png',
-    'norris.png',
-    'simmons.png',
-    'tatum.png',
-    'wemby.png',
-    'williams.png'
-  ];
-
-  availableVideos: string[] = [
-    'terry.mp4',
-    'video1.mp4',
-    'buzelis.mp4',
-    'hauser.mp4',
-    'miler.mp4',
-    'williams.mp4',
-    'norris.mp4',
-    'video1.mp4',
-    'video2.mp4',
-    'video3.mp4',
-    'video4.mp4',
-    'video5.mp4',
-    'video6.mp4',
-    'video7.mp4',
-    'video8.mp4',
-    'video9.mp4',
-    'video10.mp4',
-    'video11.mp4',
-    'video12.mp4'
-  ];
-
-  selectedImageName: string = '';
-  selectedVideoName: string = '';
+  imageFile!: File;
+  videoFile!: File;
 
   constructor(private firebaseService: FirebaseService) {}
 
-  cancelar() {
+  async onSubmit() {
+    try {
+      const imageUrl = this.imageFile
+        ? await this.uploadToFirebase(this.imageFile, 'images')
+        : '';
+      const videoUrl = this.videoFile
+        ? await this.uploadToFirebase(this.videoFile, 'videos')
+        : '';
+
+      this.player.image = imageUrl;
+      this.player.videoFile = videoUrl;
+
+      await this.firebaseService.addPlayer(this.player);
+      this.playerAdded.emit();
+    } catch (error) {
+      console.error('Error al añadir jugador:', error);
+    }
+  }
+
+  onCancel() {
     this.formCancel.emit();
   }
 
-  guardarJugador(): void {
-    const imageRegex = /\.(png|jpg|jpeg)$/i;
-    const videoRegex = /\.mp4$/i;
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) this.imageFile = file;
+  }
 
-    // Validació d’extensions
-    if (
-      !imageRegex.test(this.selectedImageName) ||
-      !videoRegex.test(this.selectedVideoName)
-    ) {
-      Swal.fire(
-        'Error',
-        'Els noms dels fitxers han de tenir extensió (.png, .jpg, .mp4)',
-        'warning'
-      );
-      return;
+  onVideoSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) this.videoFile = file;
+  }
+
+    private async uploadToFirebase(file: File, folder: 'images' | 'videos'): Promise<string> {
+      const storage = getStorage();
+      const uniqueName = `${uuidv4()}-${file.name}`;
+      const fileRef = ref(storage, `${folder}/${uniqueName}`);
+
+      await uploadBytes(fileRef, file);
+      return await getDownloadURL(fileRef);
     }
 
-    // Construïm les rutes relatives
-    this.player.image = `assets/img/${this.selectedImageName}`;
-    this.player.videoFile = this.selectedVideoName;
-
-    // Guardem a Firestore
-    this.firebaseService
-      .addPlayer(this.player)
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Jugador añadido',
-          text: `${this.player.name} ha sido guardado correctamente.`,
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#28a745',
-        });
-        this.playerAdded.emit();
-        this.cancelar();
-      })
-      .catch((err) => {
-        console.error('❌ Error al afegir jugador:', err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se ha podido añadir el jugador.',
-          confirmButtonText: 'Cerrar',
-          confirmButtonColor: '#6c757d',
-        });
-      });
-
-  }
 }

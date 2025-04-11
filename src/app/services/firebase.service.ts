@@ -1,57 +1,65 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore,
-  collection,
-  collectionData,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-  doc,
-  CollectionReference,
-} from '@angular/fire/firestore';
+  Database,
+  ref,
+  push,
+  set,
+  update,
+  remove,
+  onValue,
+  get,
+  child,
+} from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { Player } from '../components/players/player/player.model'; // Asegúrate de que la ruta esté bien
+import { NgZone, inject } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+
+
+@Injectable({ providedIn: 'root' })
 export class FirebaseService {
-  private playersRef: CollectionReference;
+  //constructor(private db: Database, private ngZone: NgZone) {}
+  private zone = inject(NgZone);
 
-  constructor(private firestore: Firestore) {
-    // Referencia a la colección "players"
-    this.playersRef = collection(this.firestore, 'players');
+  // Crear jugador
+  async addPlayer(player: any) {
+    const jugadoresRef = ref(this.db, 'players');
+    const nuevoJugadorRef = push(jugadoresRef);
+    return set(nuevoJugadorRef, player);
   }
 
-  /**
-   * Obtiene todos los jugadores de Firebase como un Observable
-   */
-  getPlayers(): Observable<Player[]> {
-    return collectionData(this.playersRef, { idField: 'id' }) as Observable<
-      Player[]
-    >;
+  // Obtener todos los jugadores como Observable (para async pipe)
+  constructor(private db: Database) {}
+  getPlayers(): Observable<any[]> {
+    return new Observable((observer) => {
+      const jugadoresRef = ref(this.db, 'players');
+      onValue(jugadoresRef, (snapshot) => {
+        const jugadores: any[] = [];
+        snapshot.forEach((childSnapshot) => {
+          jugadores.push({ id: childSnapshot.key, ...childSnapshot.val() });
+        });
+
+        this.zone.run(() => {
+          observer.next(jugadores);
+        });
+      });
+    });
+  }
+  // Actualizar jugador
+  updatePlayer(id: string, player: any) {
+    const playerRef = ref(this.db, `players/${id}`);
+    return update(playerRef, player);
   }
 
-  /**
-   * Añade un nuevo jugador a Firebase
-   */
-  addPlayer(player: Player): Promise<any> {
-    return addDoc(this.playersRef, player);
+  // Borrar jugador
+  deletePlayer(id: string) {
+    const playerRef = ref(this.db, `players/${id}`);
+    return remove(playerRef);
   }
 
-  /**
-   * Elimina un jugador de Firebase por su ID
-   */
-  deletePlayer(id: string): Promise<void> {
-    const docRef = doc(this.firestore, `players/${id}`);
-    return deleteDoc(docRef);
-  }
-
-  /**
-   * Actualiza los datos de un jugador en Firebase
-   */
-  updatePlayer(id: string, data: Partial<Player>): Promise<void> {
-    const docRef = doc(this.firestore, `players/${id}`);
-    return updateDoc(docRef, data);
+  // Obtener un jugador por ID
+  async getPlayerById(id: string) {
+    const playerRef = ref(this.db);
+    const snapshot = await get(child(playerRef, `players/${id}`));
+    return snapshot.exists() ? snapshot.val() : null;
   }
 }

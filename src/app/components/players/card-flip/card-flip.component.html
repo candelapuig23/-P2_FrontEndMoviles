@@ -23,21 +23,21 @@
     </div>
 
     <!-- Cara Trasera -->
-<div class="back">
-  <h2 class="player-name">{{ player.name }}</h2>
-  <table class="details-table">
-    <tr><td><strong>Altura:</strong></td><td>{{ player.height }}</td></tr>
-    <tr><td><strong>Peso:</strong></td><td>{{ player.weight }}</td></tr>
-    <tr><td><strong>Edad:</strong></td><td>{{ player.age }}</td></tr>
-    <tr><td><strong>PPG:</strong></td><td>{{ player.ppg }}</td></tr>
-    <tr><td><strong>RPG:</strong></td><td>{{ player.rpg }}</td></tr>
-    <tr><td><strong>APG:</strong></td><td>{{ player.apg }}</td></tr>
-  </table>
-  <button class="btn btn-info btn-sm mt-2" (click)="openVideo($event)">Ver Vídeo</button>
-
+    <div class="back">
+      <h2 class="player-name">{{ player.name }}</h2>
+      <table class="details-table">
+        <tr><td><strong>Altura:</strong></td><td>{{ player.height }}</td></tr>
+        <tr><td><strong>Peso:</strong></td><td>{{ player.weight }}</td></tr>
+        <tr><td><strong>Edad:</strong></td><td>{{ player.age }}</td></tr>
+        <tr><td><strong>PPG:</strong></td><td>{{ player.ppg }}</td></tr>
+        <tr><td><strong>RPG:</strong></td><td>{{ player.rpg }}</td></tr>
+        <tr><td><strong>APG:</strong></td><td>{{ player.apg }}</td></tr>
+      </table>
+      <button class="btn btn-info btn-sm mt-2" (click)="openVideo($event)">Ver Vídeo</button>
+    </div>
+   </div>
 </div>
+ <app-media
+        [videoSrc]="player.videoFile"
+        [playerName]="player.name"></app-media>
 
-  </div>
-</div>
-
-<app-media [videoSrc]="'assets/media/' + player.videoFile"></app-media>

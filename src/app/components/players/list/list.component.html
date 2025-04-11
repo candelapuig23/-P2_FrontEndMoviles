@@ -15,7 +15,6 @@
           <i class="bi bi-plus-circle"></i>
           Añadir jugador
         </button>
-
       </div>
 
       <!-- Formulario añadir -->
@@ -35,6 +34,8 @@
 
       <!-- Lista jugadores -->
       <ng-container *ngIf="players$ | async as playersList">
+        <p *ngIf="playersList.length === 0">No hay jugadores.</p>
+
         <div class="players-grid">
           <div
             *ngFor="let player of playersList | playerFilter:searchTerm:(filterBy?.position || ''):(filterBy?.height || ''):(filterBy?.weight || ''):(filterBy?.age || ''):(filterBy?.ppg || ''):(filterBy?.rpg || ''):(filterBy?.apg || '')"

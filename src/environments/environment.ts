@@ -3,7 +3,8 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyAGKVEljEE0T1RocMlKu1OMPg-UbUJqBo0',
     authDomain: 'producto2-988a8.firebaseapp.com',
-    databaseURL: 'https://producto2-988a8.appspot.com',
+    databaseURL:
+      'https://producto2-988a8-default-rtdb.europe-west1.firebasedatabase.app/',
     projectId: 'producto2-988a8',
     storageBucket: 'producto2-988a8.firebasestorage.app',
     messagingSenderId: '519196572776',

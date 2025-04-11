@@ -1,128 +1,78 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../../services/firebase.service';
-import Swal from 'sweetalert2';
 import { Player } from '../player/player.model';
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from '@angular/fire/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-edit-player-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './edit-player-form.component.html',
   styleUrls: ['./edit-player-form.component.css'],
+  imports: [CommonModule, FormsModule],
 })
 export class EditPlayerFormComponent {
   @Input() player!: Player;
   @Output() playerUpdated = new EventEmitter<void>();
-  @Output() cancelEdit = new EventEmitter<void>();
+  @Output() formCancel = new EventEmitter<void>();
 
-  selectedImageName = '';
-  selectedVideoName = '';
-
-  // Arxius disponibles a assets/img i assets/media
-  availableImages: string[] = [
-    'lebron.png',
-    'tatum.png',
-    'terry.png',
-    'davis.png',
-    'brown.png',
-    'buzelis.png',
-    'doncic.png',
-    'embiid.png',
-    'giannis.png',
-    'hauser.png',
-    'klay.png',
-    'miller.png',
-    'moody.png',
-    'norris.png',
-    'simmons.png',
-    'tatum.png',
-    'wemby.png',
-    'williams.png',
-  ];
-
-  availableVideos: string[] = [
-    'terry.mp4',
-    'video1.mp4',
-    'buzelis.mp4',
-    'hauser.mp4',
-    'miler.mp4',
-    'williams.mp4',
-    'norris.mp4',
-    'video1.mp4',
-    'video2.mp4',
-    'video3.mp4',
-    'video4.mp4',
-    'video5.mp4',
-    'video6.mp4',
-    'video7.mp4',
-    'video8.mp4',
-    'video9.mp4',
-    'video10.mp4',
-    'video11.mp4',
-    'video12.mp4',
-  ];
+  imageFile!: File;
+  videoFile!: File;
 
   constructor(private firebaseService: FirebaseService) {}
 
-  ngOnInit() {
-    this.selectedImageName = this.player.image.replace('assets/img/', '');
-    this.selectedVideoName = this.player.videoFile.replace('assets/media/', '');
-  }
+  async onSubmit() {
+    try {
+      const imageUrl = this.imageFile
+        ? await this.uploadToFirebase(this.imageFile, 'images')
+        : this.player.image;
+      const videoUrl = this.videoFile
+        ? await this.uploadToFirebase(this.videoFile, 'videos')
+        : this.player.videoFile;
 
-  cancelar() {
-    this.cancelEdit.emit();
-  }
+      this.player.image = imageUrl;
+      this.player.videoFile = videoUrl;
 
-  actualizarJugador() {
-    const imageRegex = /\.(png|jpg|jpeg)$/i;
-    const videoRegex = /\.mp4$/i;
-
-    if (
-      !imageRegex.test(this.selectedImageName) ||
-      !videoRegex.test(this.selectedVideoName)
-    ) {
-      Swal.fire(
-        'Error',
-        'Los archivos deben tener extensiones válidas (.png, .jpg, .mp4)',
-        'warning'
-      );
-      return;
-    }
-
-    const updatedData = {
-      ...this.player,
-      image: `assets/img/${this.selectedImageName}`,
-      videoFile: this.selectedVideoName,
-    };
-
-    if (!this.player.id) {
-      console.error('El jugador no tiene ID');
-      return;
-    }
-    this.firebaseService
-      .updatePlayer(this.player.id, updatedData)
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Jugador actualizado',
-          text: `${this.player.name} ha sido modificado correctamente.`,
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#28a745',
-        });
+      if (this.player.id) {
+        await this.firebaseService.updatePlayer(this.player.id, this.player);
         this.playerUpdated.emit();
-        this.cancelar();
-      })
-      .catch((err) => {
-        console.error('❌ Error al actualizar jugador:', err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se ha podido actualizar el jugador.',
-          confirmButtonText: 'Cerrar',
-          confirmButtonColor: '#6c757d',
-        });
-      });
+      }
+    } catch (error) {
+      console.error('Error al editar jugador:', error);
+    }
+  }
+
+  onCancel() {
+    this.formCancel.emit();
+  }
+
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) this.imageFile = file;
+  }
+
+  onVideoSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) this.videoFile = file;
+  }
+
+  private async uploadToFirebase(
+    file: File,
+    folder: 'images' | 'videos'
+  ): Promise<string> {
+    const storage = getStorage();
+    const uniqueName = `${uuidv4()}-${file.name}`;
+    const fileRef = ref(storage, `${folder}/${uniqueName}`);
+
+    await uploadBytes(fileRef, file);
+    return await getDownloadURL(fileRef);
   }
 }

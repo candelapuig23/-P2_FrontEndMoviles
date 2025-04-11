@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { CommonModule } from '@angular/common';
 import { MediaComponent } from '../media/media.component';
 import Swal from 'sweetalert2';
+import { Player } from '../player/player.model';
 
 
 
@@ -29,7 +30,7 @@ export class FlipCardComponent {
   static activeCard: FlipCardComponent | null = null;
 
   @ViewChild(MediaComponent) mediaComponent!: MediaComponent;
-  @Output() delete = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<Player>();
   @Output() edit = new EventEmitter<any>();
 
   emitEdit(event: Event) {
@@ -62,26 +63,22 @@ export class FlipCardComponent {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.delete.emit(this.player.id); // Emitimos el evento
+        this.delete.emit(this.player);
         Swal.fire({
           icon: 'success',
           title: 'Eliminado',
           text: `${this.player.name} ha sido eliminado correctamente`,
           confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#14a44d'
+          confirmButtonColor: '#14a44d',
         });
       }
     });
   }
 
   openVideo(event: Event) {
-    event.stopPropagation(); // Evita que la carta gire cuando se abre el modal
+    event.stopPropagation();
     if (this.mediaComponent) {
-      console.log(`🟢 Abriendo video de ${this.player.name}...`);
-      this.mediaComponent.playerName = this.player.name; // Asigna el nombre del jugador al modal
       this.mediaComponent.openModal();
-    } else {
-      console.error('❌ No se encontró el MediaComponent');
     }
   }
 }
